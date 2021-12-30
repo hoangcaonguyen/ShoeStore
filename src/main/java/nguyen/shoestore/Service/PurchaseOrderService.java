@@ -72,11 +72,12 @@ public class PurchaseOrderService {
 
     public void setOrder(OrderDTO orderDTO,PurchaseOrder purchaseOrder ) {
         purchaseOrder.setIdUser(userRepo.getByCostumersName(orderDTO.getUser()).getId());
-        purchaseOrder.setIdUser(userRepo.getByStaffsName(orderDTO.getUser()).getId());
+        purchaseOrder.setIdStaff(userRepo.getByStaffsName(orderDTO.getStaff()).getId());
         purchaseOrder.setItemId(orderDTO.getItemId());
         purchaseOrder.setPurchaseQuantity(orderDTO.getQuantity());
         purchaseOrder.setMoney(orderDTO.getMoney());
         purchaseOrder.setProcessId(processRepo.getByProcessName(orderDTO.getProcess()).getProcessId());
+        purchaseOrder.setStatus(1);
     }
 
     @Transactional

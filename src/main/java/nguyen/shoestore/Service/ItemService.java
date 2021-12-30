@@ -30,10 +30,10 @@ public class ItemService {
         return itemRepo.findAll();
     }
     public List<Item> getAllItemsActive() {
-        return itemRepo.getByStatus(1);
+        return itemRepo.findByStatus(1);
     }
     public List<Item> getAllItemsUnActive() {
-        return itemRepo.getByStatus(0);
+        return itemRepo.findByStatus(0);
     }
     public Optional<Item> findById(Integer itemId) {
         return itemRepo.findById(itemId);
@@ -66,12 +66,12 @@ public class ItemService {
                 MessageUtils.getMessage("error.notfound",itemDTO.getColorName()));
         Assert.notNull(productTypeRepo.getByTypeName(itemDTO.getType()),
                 MessageUtils.getMessage("error.notfound",itemDTO.getType()));
-        List<Item> items = itemRepo.getByProductIdAndColorIdAndTypeId(
+        List<Item> items = itemRepo.findByProductIdAndColorIdAndTypeId(
                 productRepo.getByProductName(itemDTO.getProductName()).getProductId(),
                 colorRepo.getByColorName(itemDTO.getColorName()).getColorId(),
                 productTypeRepo.getByTypeName(itemDTO.getType()).getTypeId()
         );
-        if(items == null){
+        if(items.isEmpty()){
             setItem(itemDTO, item);
         }else {
             for(Item i : items){
@@ -93,6 +93,7 @@ public class ItemService {
         item.setNumItems(itemDTO.getNumItems());
         item.setTypeId(productTypeRepo.getByTypeName(itemDTO.getType()).getTypeId());
         item.setSale(itemDTO.getSale());
+        item.setStatus(1);
         itemRepo.save(item);
     }
 

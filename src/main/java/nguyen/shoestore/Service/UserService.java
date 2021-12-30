@@ -61,7 +61,7 @@ public class UserService {
     public ResponseDTO AddUser(UserDTO userDTO){
         ResponseDTO responseDTO = new ResponseDTO();
         User user = new User();
-        Assert.isTrue(DataUtils.notNullOrEmpty((Collection) userDTO), MessageUtils.getMessage("error.input.null", userDTO));
+        Assert.notNull(userDTO, MessageUtils.getMessage("error.input.null", userDTO));
         Role role = roleService.findRoleByName(userDTO.getRole());
         Assert.notNull(role, MessageUtils.getMessage("error.notfound", userDTO.getRole()));
         user.setRoleId(role.getRoleId());
@@ -69,9 +69,9 @@ public class UserService {
         User user1 = userRepo.findByUserName(userDTO.getUserName());
         Assert.isNull(user1, MessageUtils.getMessage("username.not.valid", userDTO.getUserName()));
         user1 = userRepo.findByEmail(userDTO.getEmail());
-        Assert.isNull(user1, MessageUtils.getMessage("success.found ", userDTO.getEmail()));
+        Assert.isNull(user1, MessageUtils.getMessage("success.found", userDTO.getEmail()));
         user1 = userRepo.findByPhoneNumber(userDTO.getPhoneNumber());
-        Assert.isNull(user1, MessageUtils.getMessage("success.found ", userDTO.getPhoneNumber()));
+        Assert.isNull(user1, MessageUtils.getMessage("success.found", userDTO.getPhoneNumber()));
         user.setUserName(userDTO.getUserName());
         user.setPassWord(userDTO.getPassWord());
         user.setFullName(userDTO.getFullName());

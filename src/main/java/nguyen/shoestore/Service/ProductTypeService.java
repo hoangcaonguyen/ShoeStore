@@ -37,7 +37,9 @@ public class ProductTypeService {
         ResponseDTO responseDTO = new ResponseDTO();
         ProductType productType = productTypeRepo.getByTypeName(typeName);
         Assert.isNull(productType, MessageUtils.getMessage("error.notfound",typeName));
-        productTypeRepo.save(productType);
+        ProductType productType1 = new ProductType();
+        productType1.setTypeName(typeName);
+        productTypeRepo.save(productType1);
         return responseDTO;
     }
     @Transactional

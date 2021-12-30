@@ -30,7 +30,7 @@ public class ProductTypeController {
         return productTypeService.findProductTypeByName(typeName);
     }
     @PostMapping(value = "/add")
-    public ResponseDTO addProductType(@RequestBody String typeName){
+    public ResponseDTO addProductType(@RequestParam String typeName){
         ResponseDTO response = new ResponseDTO();
         response = productTypeService.AddProductType(typeName);
         return response;

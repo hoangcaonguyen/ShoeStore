@@ -47,6 +47,7 @@ public class ProductService {
         Product product = new Product();
         Assert.isNull(productRepo.getByProductName(productDTO.getProductName()),
                 MessageUtils.getMessage("error.notfound",productDTO.getProductName()));
+        product.setProductName(productDTO.getProductName());
     //TODO : them updater.
         return responseDTO;
     }
